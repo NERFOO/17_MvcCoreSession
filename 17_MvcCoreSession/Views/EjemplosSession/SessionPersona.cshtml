@@ -1,0 +1,15 @@
+﻿@{
+    Persona persona = ViewData["PERSONA"] as Persona;
+}
+
+<h1>Session Persona</h1>
+
+
+<a asp-controller="EjemplosSession" asp-action="SessionPersona" asp-route-accion="almacenar">Almacenar Persona</a>
+<a asp-controller="EjemplosSession" asp-action="SessionPersona" asp-route-accion="mostrar">Mostrar Persona</a>
+
+
+@if(persona != null) {
+    <h1 style="color:blue">Datos personales: @persona.Nombre, @persona.Email</h1>
+    <h1 style="color:red">Edad: @persona.Edad</h1>
+}
