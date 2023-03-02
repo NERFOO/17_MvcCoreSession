@@ -3,13 +3,12 @@
 @{
     ViewData["Title"] = "Home Page";
 
-    Persona persona = null;
+    Persona persona = Context.Session.GetObject<Persona>("PERSONAOBJECT");
 
-    if (Context.Session.GetString("PERSONA") != null)
-    {
-        string jsonPersona = Context.Session.GetString("PERSONA");
-        persona = HelperJsonSession.DeserializeObject<Persona>(jsonPersona);
-    }
+    //if (Context.Session.GetString("PERSONA") != null)
+    //{
+    //    persona = HelperJsonSession.DeserializeObject<Persona>(jsonPersona);
+    //}
 }
 
 

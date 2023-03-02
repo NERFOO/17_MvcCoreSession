@@ -16,12 +16,6 @@ namespace _17_MvcCoreSession.Helpers
             }
         }
 
-        public static int GetNumerosPalabras(this string texto)
-        {
-            //HACEMOS LOS BUCLES O LO QUE SEA
-            return 1;
-        }
-
         //OTRO METODO PARA RECUPERAR UN BINARY A OBJECT
         public static Object ByteToObject(byte[] data)
         {

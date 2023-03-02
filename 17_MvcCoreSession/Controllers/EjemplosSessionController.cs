@@ -1,4 +1,5 @@
-﻿using _17_MvcCoreSession.Helpers;
+﻿using _17_MvcCoreSession.Extensions;
+using _17_MvcCoreSession.Helpers;
 using _17_MvcCoreSession.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -124,6 +125,61 @@ namespace _17_MvcCoreSession.Controllers
                     Persona persona = HelperJsonSession.DeserializeObject<Persona>(jsonPersona);
 
                     ViewData["PERSONA"] = persona;
+                }
+            }
+
+            return View();
+        }
+
+        public IActionResult SessionPersonaObject(string accion)
+        {
+            if (accion != null)
+            {
+                if (accion.ToLower() == "almacenar")
+                {
+                    Persona persona = new Persona();
+                    persona.Nombre = "Jaime Object";
+                    persona.Email = "blabla object";
+                    persona.Edad = 21;
+
+                    HttpContext.Session.SetObject("PERSONAOBJECT", persona);
+
+                    ViewData["MENSAJE"] = "Datos almacenados";
+                }
+                else if (accion.ToLower() == "mostrar")
+                {
+                    Persona persona = HttpContext.Session.GetObject<Persona>("PERSONAOBJECT");
+
+                    ViewData["PERSONA"] = persona;
+                }
+            }
+
+            return View();
+        }
+
+        public IActionResult ColeccionSessionObject(string accion)
+        {
+            if (accion != null)
+            {
+                if (accion.ToLower() == "almacenar")
+                {
+                    List<Persona> personas = new List<Persona>
+                    {
+                        new Persona { Nombre = "Lolo", Email = "lolo", Edad = 22 },
+                        new Persona { Nombre = "Lola", Email = "lola", Edad = 23 },
+                        new Persona { Nombre = "Lolu", Email = "lolu", Edad = 24 },
+                        new Persona { Nombre = "Loli", Email = "loli", Edad = 25 },
+                        new Persona { Nombre = "Lole", Email = "lole", Edad = 26 }
+                    };
+
+                    HttpContext.Session.SetObject("LISTAPERSONASOBJECT", personas);
+                    ViewData["MENSAJE"] = "Datos almacenados";
+                }
+                else if (accion.ToLower() == "mostrar")
+                {
+                    List<Persona> personas = HttpContext.Session.GetObject<List<Persona>>("LISTAPERSONASOBJECT");
+
+                    return View(personas);
                 }
             }
 
